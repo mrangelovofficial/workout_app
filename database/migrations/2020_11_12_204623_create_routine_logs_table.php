@@ -17,7 +17,7 @@ class CreateRoutineLogsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('routine_id');
-            $table->integer('weight');
+            $table->float('weight', 8, 2);
             $table->integer('sets');
             $table->integer('reps');
 

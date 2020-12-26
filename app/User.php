@@ -41,6 +41,11 @@ class User extends Authenticatable
     public function routines(){
         return $this->hasMany(Routine::class);
     }
+
+    public function exercises(){
+        return $this->hasMany(Exercise::class);
+    }
+    
     public function routine_logs(){
         return $this->hasMany(RoutineLog::class);
     }

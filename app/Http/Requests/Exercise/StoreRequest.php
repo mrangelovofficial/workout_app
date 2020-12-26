@@ -23,8 +23,12 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name'  => 'required'
+        if(auth()->user()->isAdmin){
+            $data['global'] = 'boolean|nullable';
+        }
+        $data =  [
+            'name'  => 'required',
             ];
+        return $data;
     }
 }

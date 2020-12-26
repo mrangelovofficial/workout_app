@@ -40,11 +40,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('log.index') }}">{{ __('Routine Log') }}</a>
                             </li>
-                            @if(auth()->user()->isAdmin)
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('exercise.index') }}">{{ __('Exercises') }}</a>
-                                </li>
-                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('exercise.index') }}">{{ __('Exercises') }}</a>
+                            </li>
                         @endauth
                     </ul>
 

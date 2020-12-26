@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Exercise;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Exercise\StoreRequest;
 use Illuminate\Http\Request;
+use \Auth;
 
 class ExerciseController extends Controller
 {
@@ -16,7 +17,7 @@ class ExerciseController extends Controller
      */
     public function index()
     {
-        $exercises = Exercise::all();
+        $exercises = Exercise::where('user_id',auth()->user()->id);
         return view('user.exercise.index',['exercises'=>$exercises]);
     }
 
@@ -40,7 +41,9 @@ class ExerciseController extends Controller
     public function store(StoreRequest $request)
     {
         Exercise::create([
-            'name'    =>  $request->name
+            'name'      =>  $request->name,
+            'user_id'   =>  auth()->user()->id,
+            'global'    =>  ($request->global && auth()->user()->isAdmin ? true : false),
         ]);
 
         return redirect()->route('exercise.index');

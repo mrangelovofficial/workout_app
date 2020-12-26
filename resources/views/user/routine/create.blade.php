@@ -19,6 +19,14 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="day_of_week">Day of week</label>
+                                <select class="form-control" name="day_of_week" id="day_of_week">
+                                    @foreach($dayOfWeek as $day)
+                                    <option value="{{$day['id']}}">{{$day['name']}}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="sets">Default sets</label>
                                 <input type="text" name="sets" value="{{ old('sets') }}" class="form-control @error('sets') is-invalid @enderror" id="sets" placeholder="Enter sets">
                                 @error('sets')

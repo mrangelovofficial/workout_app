@@ -20,7 +20,8 @@ class RoutineController extends Controller
 
     public function index()
     {
-        $day     = $this->getToday();
+        $dayOfTheWeek = Carbon::now()->dayOfWeek;
+        $day     = $this->getToday($dayOfTheWeek);
         $routines = Routine::with('exercise')->where('day_of_week',$day->id)->get();
 
         return view('user.routine.index', [
@@ -36,9 +37,11 @@ class RoutineController extends Controller
      */
     public function create()
     {
-        $exercises = Exercise::get();
+        $dayOfWeek = $this->getToday();
+        $exercises = Exercise::where('user_id',auth()->user()->id)->orWhere('global', '1')->get();
         return view('user.routine.create',[
-            'exercises'  =>  $exercises
+            'exercises'  =>  $exercises,
+            'dayOfWeek'  =>  $dayOfWeek,
         ]);
     }
 
@@ -56,7 +59,7 @@ class RoutineController extends Controller
             'reps'              =>  $request->reps,
             'user_id'           =>  auth()->user()->id,
             'exercise_id'       =>  $exercise->id,
-            'day_of_week'       =>  $this->getToday()->id,
+            'day_of_week'       =>  $request->day_of_week,
             'exercise_order'    =>  $request->exercise_order
         ]);
 
@@ -109,18 +112,20 @@ class RoutineController extends Controller
         return redirect()->route('routine.index');
     }
 
-    private function getToday()
+    private function getToday($dayOfTheWeek = null)
     {
-        $dayOfTheWeek = Carbon::now()->dayOfWeek;
         $weekMap = [
-            0 => ['name' => 'Sunday','id' => 6],
             1 => ['name' => 'Monday','id' => 0],
             2 => ['name' => 'Tuesday','id' => 1],
             3 => ['name' => 'Wednesday','id' => 2],
             4 => ['name' => 'Thursday','id' => 3],
             5 => ['name' => 'Friday','id' => 4],
             6 => ['name' => 'Saturday','id' => 5],
+            0 => ['name' => 'Sunday','id' => 6],
         ];
+        if(is_null($dayOfTheWeek)){
+            return (object)$weekMap;
+        }
         return (object)$weekMap[$dayOfTheWeek];
     }
 }

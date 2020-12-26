@@ -20,8 +20,6 @@ Auth::routes();
 Route::group(['middleware' => ['auth'],'namespace' => 'User'], function () {
     Route::resource('/routine', 'RoutineController');
     Route::resource('/log', 'RoutineLogController');
-});
-Route::group(['middleware' => ['auth','admin'],'namespace' => 'Admin'], function () {
     Route::resource('/exercise', 'ExerciseController');
 });
 

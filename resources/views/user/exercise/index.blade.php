@@ -35,7 +35,6 @@
                                 <td>{{$exercise->picture}}</td>
                                 <td>
                                     <div class="row">
-                                        <a href="{{route('exercise.edit',$exercise->id)}}" class="btn btn-small mr-2 btn-success">Edit</a>
                                         <form action="{{ route('exercise.destroy', $exercise->id) }}" method="POST">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}

@@ -23,7 +23,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Exercise Name</th>
-                                <th scope="col">Picture</th>
+                                {{-- <th scope="col">Picture</th> --}}
                                 <th scope="col">Sets</th>
                                 <th scope="col">Reps</th>
                                 <th scope="col">Action</th>
@@ -34,7 +34,7 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{$routine->exercise->name}}</td>
-                                <td>{{$routine->exercise->picture}}</td>
+                                {{-- <td>{{$routine->exercise->picture}}</td> --}}
                                 <td>{{$routine->sets}}</td>
                                 <td>{{$routine->reps}}</td>
                                 <td>
